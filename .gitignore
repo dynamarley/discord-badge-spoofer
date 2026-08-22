@@ -5,9 +5,6 @@ science_state.json
 __pycache__/
 *.py[cod]
 *$py.class
-.venv/
-venv/
-ENV/
 
 # Game dataset cache
 data/

@@ -1,4 +1,0 @@
-# Discord Badge Spoofer - Requirements
-# This project uses pure Python 3.10+ standard libraries (built-in modules).
-# No external third-party PyPI dependencies are strictly required.
-# Standard library modules used: tkinter, urllib, json, dataclasses, threading, queue, pathlib, uuid, base64, time.

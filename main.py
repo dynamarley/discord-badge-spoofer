@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 import queue
 import sys
 import threading
@@ -22,10 +23,20 @@ from pathlib import Path
 from tkinter import messagebox, ttk
 from typing import Iterator, Sequence
 
+def _get_app_dir() -> Path:
+    if sys.platform == "win32":
+        app_data = os.environ.get("APPDATA")
+        base = Path(app_data) if app_data else Path.home() / "AppData" / "Roaming"
+    else:
+        base = Path.home() / ".config"
+    dir_path = base / "DiscordBadgeSpoofer"
+    dir_path.mkdir(parents=True, exist_ok=True)
+    return dir_path
+
 # Constants & Paths
-ROOT = Path(__file__).resolve().parent
-GAMES_FILE = ROOT / "data" / "games.json"
-STATE_FILE = ROOT / "science_state.json"
+APP_DIR = _get_app_dir()
+GAMES_FILE = APP_DIR / "data" / "games.json"
+STATE_FILE = APP_DIR / "science_state.json"
 
 ME_URL = "https://discord.com/api/v9/users/@me?with_analytics_token=true"
 SCIENCE_URL = "https://discord.com/api/v9/science"
@@ -367,12 +378,12 @@ class HelpModal(tk.Toplevel):
         super().__init__(parent)
         self.title(title)
         self.configure(bg=BG)
+        self.overrideredirect(True)
         self.transient(parent)
         self.grab_set()
 
-        width, height = 640, 500
+        width, height = 640, 480
         self.geometry(f"{width}x{height}")
-        self.minsize(580, 440)
 
         try:
             px = parent.winfo_x() + (parent.winfo_width() // 2) - (width // 2)
@@ -381,11 +392,27 @@ class HelpModal(tk.Toplevel):
         except Exception:
             pass
 
-        container = tk.Frame(self, bg=BG, padx=26, pady=22)
+        # Outer border frame
+        outer = tk.Frame(self, bg=BG, highlightbackground=BORDER, highlightthickness=1)
+        outer.pack(fill="both", expand=True)
+
+        container = tk.Frame(outer, bg=BG, padx=24, pady=20)
         container.pack(fill="both", expand=True)
 
-        hdr = tk.Frame(container, bg=BG)
+        hdr = tk.Frame(container, bg=BG, cursor="fleur")
         hdr.pack(fill="x", pady=(0, 16))
+
+        def _start_drag(event):
+            self._drag_x = event.x
+            self._drag_y = event.y
+
+        def _do_drag(event):
+            x = self.winfo_x() + (event.x - self._drag_x)
+            y = self.winfo_y() + (event.y - self._drag_y)
+            self.geometry(f"+{x}+{y}")
+
+        hdr.bind("<Button-1>", _start_drag)
+        hdr.bind("<B1-Motion>", _do_drag)
 
         tk.Label(hdr, text="✦", bg=BG, fg=ACCENT, font=(FONT, 18, "bold")).pack(side="left", padx=(0, 10))
         tk.Label(hdr, text=title, bg=BG, fg=TEXT, font=(FONT, 14, "bold")).pack(side="left")
@@ -472,6 +499,15 @@ class Launcher(tk.Tk):
         self.geometry("1140x780")
         self.minsize(980, 700)
         self.configure(bg=BG)
+
+        ICON_FILE = ROOT / "assets" / "icon.ico"
+        if not ICON_FILE.exists():
+            ICON_FILE = ROOT / "icon.ico"
+        if ICON_FILE.exists():
+            try:
+                self.iconbitmap(str(ICON_FILE))
+            except Exception:
+                pass
 
         self.state = State.load()
         self.games: list[Game] = []
