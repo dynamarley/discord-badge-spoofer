@@ -501,12 +501,23 @@ class Launcher(tk.Tk):
         self.minsize(980, 700)
         self.configure(bg=BG)
 
-        ICON_FILE = ROOT / "assets" / "icon.ico"
-        if not ICON_FILE.exists():
-            ICON_FILE = ROOT / "icon.ico"
-        if ICON_FILE.exists():
+        ICON_ICO = ROOT / "assets" / "icon.ico"
+        ICON_PNG = ROOT / "assets" / "icon.png"
+        if not ICON_ICO.exists():
+            ICON_ICO = ROOT / "icon.ico"
+        if not ICON_PNG.exists():
+            ICON_PNG = ROOT / "icon.png"
+
+        if ICON_ICO.exists():
             try:
-                self.iconbitmap(str(ICON_FILE))
+                self.iconbitmap(str(ICON_ICO))
+            except Exception:
+                pass
+
+        if ICON_PNG.exists():
+            try:
+                self.icon_photo = tk.PhotoImage(file=str(ICON_PNG))
+                self.iconphoto(True, self.icon_photo)
             except Exception:
                 pass
 
@@ -896,6 +907,13 @@ class Launcher(tk.Tk):
 
 
 def main() -> None:
+    if sys.platform == "win32":
+        try:
+            import ctypes
+            myappid = "dynamarley.discordbadgespoofer.launcher.v1"
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        except Exception:
+            pass
     Launcher().mainloop()
 
 
