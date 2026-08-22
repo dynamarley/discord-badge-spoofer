@@ -1,6 +1,6 @@
 # Discord Badge Spoofer 🚀
 
-A powerful and dependency-free tool to inflate your Discord profile activity badges by simulating game launch and running telemetry events directly to Discord's Science endpoint.
+A powerful, standalone, and dependency-free tool to inflate your Discord profile activity badges by simulating game launch and running telemetry events directly to Discord's Science endpoint.
 
 > **Warning & Disclaimer**  
 > This project is for educational and testing purposes only. Using this tool violates Discord's Terms of Service. Use it at your own risk and preferably on alternate accounts.
@@ -9,9 +9,10 @@ A powerful and dependency-free tool to inflate your Discord profile activity bad
 
 ### 🌟 Features
 
-- **Standalone GUI Application (`main.py`)**: Built with Python's native `tkinter` interface. Fully styled in dark theme with **in-app "How to find?" help popups**, operation controls, live progress, and statistics.
+- **Standalone GUI Application (`main.py`)**: Built with Python's native `tkinter` interface. Fully styled in dark theme with custom red Discord icon, **in-app "How to find?" help popups**, operation controls, live progress, and statistics.
 - **Single File Architecture**: All engine logic, networking, and user interface are self-contained in a single executable Python script (`main.py`).
-- **Dependency-Free**: Uses only Python standard library components.
+- **Zero External Dependencies**: Uses only Python standard library modules (`tkinter`, `urllib`, `dataclasses`, `json`, `threading`). No `pip install` required!
+- **AppData Storage**: Saved credentials (`science_state.json`) and game data cache are automatically stored in `%APPDATA%\DiscordBadgeSpoofer` so the script can be run from anywhere.
 - **Batch Processing**: Simulates thousands of played games and cumulative played hours seamlessly.
 
 ---
@@ -19,15 +20,15 @@ A powerful and dependency-free tool to inflate your Discord profile activity bad
 ### 📋 Requirements & Environment
 
 - **Python Version**: Python 3.10 or higher (`Python 3.10+`).
-- **Operating System**: Windows, macOS, or Linux (Windows recommended for `start.bat`).
-- **Dependencies**: Listed in `requirements.txt` (uses standard Python library modules: `tkinter`, `urllib`, `dataclasses`, `json`, `threading`).
+- **Operating System**: Windows, macOS, or Linux.
+- **Dependencies**: None (100% Python Standard Library).
 
 ---
 
 ### 🚀 Quick Start
 
 #### Method 1: One-Click Startup (Windows)
-Double-click `start.bat`. It will automatically check `requirements.txt` and launch the application.
+Double-click `start.bat`.
 
 #### Method 2: Manual Terminal Execution
 
@@ -36,11 +37,7 @@ Double-click `start.bat`. It will automatically check `requirements.txt` and lau
    git clone https://github.com/DynaMarley/discord-badge-spoofer.git
    cd discord-badge-spoofer
    ```
-2. Check requirements:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the application:
+2. Run the application directly:
    ```bash
    python main.py
    ```
