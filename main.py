@@ -34,6 +34,7 @@ def _get_app_dir() -> Path:
     return dir_path
 
 # Constants & Paths
+ROOT = Path(__file__).resolve().parent
 APP_DIR = _get_app_dir()
 GAMES_FILE = APP_DIR / "data" / "games.json"
 STATE_FILE = APP_DIR / "science_state.json"
