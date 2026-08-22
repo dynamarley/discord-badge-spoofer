@@ -23,21 +23,10 @@ from pathlib import Path
 from tkinter import messagebox, ttk
 from typing import Iterator, Sequence
 
-def _get_app_dir() -> Path:
-    if sys.platform == "win32":
-        app_data = os.environ.get("APPDATA")
-        base = Path(app_data) if app_data else Path.home() / "AppData" / "Roaming"
-    else:
-        base = Path.home() / ".config"
-    dir_path = base / "DiscordBadgeSpoofer"
-    dir_path.mkdir(parents=True, exist_ok=True)
-    return dir_path
-
 # Constants & Paths
 ROOT = Path(__file__).resolve().parent
-APP_DIR = _get_app_dir()
-GAMES_FILE = APP_DIR / "data" / "games.json"
-STATE_FILE = APP_DIR / "science_state.json"
+GAMES_FILE = ROOT / "data" / "games.json"
+STATE_FILE = ROOT / "science_state.json"
 
 ME_URL = "https://discord.com/api/v9/users/@me?with_analytics_token=true"
 SCIENCE_URL = "https://discord.com/api/v9/science"

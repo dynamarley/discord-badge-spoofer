@@ -12,7 +12,6 @@ A powerful, standalone, and dependency-free tool to inflate your Discord profile
 - **Standalone GUI Application (`main.py`)**: Built with Python's native `tkinter` interface. Fully styled in dark theme with custom red Discord icon, **in-app "How to find?" help popups**, operation controls, live progress, and statistics.
 - **Single File Architecture**: All engine logic, networking, and user interface are self-contained in a single executable Python script (`main.py`).
 - **Zero External Dependencies**: Uses only Python standard library modules (`tkinter`, `urllib`, `dataclasses`, `json`, `threading`). No `pip install` required!
-- **AppData Storage**: Saved credentials (`science_state.json`) and game data cache are automatically stored in `%APPDATA%\DiscordBadgeSpoofer` so the script can be run from anywhere.
 - **Batch Processing**: Simulates thousands of played games and cumulative played hours seamlessly.
 
 ---
@@ -70,7 +69,6 @@ Inside the application (`main.py`), you can click **"(How to find?)"** next to e
 ### ⚙️ How It Works
 
 Discord tracks played games and activity durations via telemetry events posted to `/api/v9/science`. This tool replicates the exact HTTP payload structure for `launch_game` and `running_game_heartbeat` events. Badges typically update on your Discord profile within 1-2 days.
-
 
 ---
 
