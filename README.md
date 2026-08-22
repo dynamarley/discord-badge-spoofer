@@ -70,6 +70,7 @@ Inside the application (`main.py`), you can click **"(How to find?)"** next to e
 
 Discord tracks played games and activity durations via telemetry events posted to `/api/v9/science`. This tool replicates the exact HTTP payload structure for `launch_game` and `running_game_heartbeat` events. Badges typically update on your Discord profile within 1-2 days.
 
+
 ---
 
 ## 📜 License & Credits
