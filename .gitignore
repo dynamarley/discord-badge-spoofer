@@ -1,6 +1,9 @@
 # Local authentication & state
 science_state.json
 
+# Local custom documentation
+README_TR.md
+
 # Python bytecode & virtual environments
 __pycache__/
 *.py[cod]
