@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import base64
 import json
-import os
 import queue
 import sys
 import threading
@@ -712,7 +711,7 @@ class Launcher(tk.Tk):
         footer = tk.Frame(main, bg=BG)
         footer.pack(fill="x", side="bottom", padx=54, pady=(0, 12))
         self._label(footer, "Created by DynaMarley", 9, ACCENT_HOVER, "bold").pack(side="left")
-        self._label(footer, " · Discord Badge Spoofer v1.0", 9, MUTED).pack(side="left")
+        self._label(footer, " · Discord Badge Spoofer v1.0.1", 9, MUTED).pack(side="left")
 
     def log_line(self, message: str, tag: str = "info") -> None:
         self.notice_var.set(message)
