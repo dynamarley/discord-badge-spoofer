@@ -905,7 +905,6 @@ class Launcher(tk.Tk):
             return
         self.destroy()
 
-
 def main() -> None:
     if sys.platform == "win32":
         try:
